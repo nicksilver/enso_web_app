@@ -1,0 +1,35 @@
+body {
+    margin: 0px;
+}
+
+#map {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    height: 40vw;
+    width: 100%;
+    background-color: #ffffff;
+}
+
+h1 {
+    font-family: Courier, cursive;
+    margin-left: 20px;
+}
+
+p {
+    font-family: Courier;
+    margin-left: 20px;
+}
+
+.legend {
+    width: 150px;
+    height: 175px;
+    background-color: #ffffff;
+    /*position: absolute;*/
+    /*top: 155px;*/
+    /*right: 30px;*/
+    border-radius: 10px;
+    text-align: center;
+    display: block;
+}
