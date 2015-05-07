@@ -7,7 +7,7 @@ var southWest = new L.LatLng(43.9375, -116.6250);
 var northEast = new L.LatLng(49.4375, -103.5625);
 var bounds = new L.LatLngBounds(southWest, northEast);
 //var URL = 'http://localhost/cgi-bin/mt_anomalies/qgis_mapserv.fcgi'
-var URL = 'http://ec2-52-24-142-184.us-west-2.compute.amazonaws.com/'
+var URL = 'http://ec2-52-24-169-123.us-west-2.compute.amazonaws.com/cgi-bin/mt_anomalies/qgis_mapserv.fcgi'
 
 // Background map ----------------------------------------
 L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
@@ -16,16 +16,16 @@ L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
 
 // Layers ------------------------------------------------
 var PptElS = L.tileLayer.wms(URL, {
-    map: '/usr/lib/cgi-bin/mt_anomalies/mt_anomalies3.qgs',
     format: 'image/png',
     transparent: true,
     layers: 'Ppt ElS (mm)',
     version: '1.3.0',
     opacity: 0.8
-}).addTo(map)
+}).addTo(map);
+
 
 var PptElW = L.tileLayer.wms(URL, {
-    map: '/usr/lib/cgi-bin/mt_anomalies/mt_anomalies3.qgs',
+    //map: '/usr/lib/cgi-bin/mt_anomalies/mt_anomalies4.qgs',
     format: 'image/png',
     transparent: true,
     layers: 'Ppt ElW (mm)',
@@ -34,7 +34,7 @@ var PptElW = L.tileLayer.wms(URL, {
 })
 
 var TElW = L.tileLayer.wms(URL, {
-    map: '/usr/lib/cgi-bin/mt_anomalies/mt_anomalies3.qgs',
+    //map: '/usr/lib/cgi-bin/mt_anomalies/mt_anomalies4.qgs',
     format: 'image/png',
     transparent: true,
     layers: 'T ElW (C)',
@@ -43,7 +43,7 @@ var TElW = L.tileLayer.wms(URL, {
 })
 
 var TElS = L.tileLayer.wms(URL, {
-    map: '/usr/lib/cgi-bin/mt_anomalies/mt_anomalies3.qgs',
+    //map: '/usr/lib/cgi-bin/mt_anomalies/mt_anomalies4.qgs',
     format: 'image/png',
     transparent: true,
     layers: 'T ElS (C)',
