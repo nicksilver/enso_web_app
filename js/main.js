@@ -444,8 +444,8 @@ PDOMenu.onAdd = function (map) {
     var div = L.DomUtil.create('div', 'menu');
     div.innerHTML = '<select name="pmenu" id="pmenu">' +
                         '<option value="">None</option>' +
-                        '<option value="Cool">Cool</option>' +
-                        '<option value="Warm">Warm</option>' +
+                        '<option value="Cool">PDO Cool</option>' +
+                        '<option value="Warm">PDO Warm</option>' +
 
                     '</select>';
     div.firstChild.onmousedown = div.firstChild.onclick = L.DomEvent.stopPropagation;
