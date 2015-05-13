@@ -6,8 +6,8 @@ var map = L.map('map').setView([47,-111], 6);
 var southWest = new L.LatLng(43.9375, -116.6250);
 var northEast = new L.LatLng(49.4375, -103.5625);
 var bounds = new L.LatLngBounds(southWest, northEast);
-// var URL = 'http://localhost/cgi-bin/mt_anomalies/qgis_mapserv.fcgi'
-var URL = 'http://ec2-52-24-169-123.us-west-2.compute.amazonaws.com/cgi-bin/mt_anomalies/qgis_mapserv.fcgi'
+var URL = 'http://localhost/cgi-bin/mt_anomalies/qgis_mapserv.fcgi'
+//var URL = 'http://ec2-52-24-169-123.us-west-2.compute.amazonaws.com/cgi-bin/mt_anomalies/qgis_mapserv.fcgi'
 
 // Background map ----------------------------------------
 L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
@@ -15,25 +15,26 @@ L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 var osmGeocoder = new L.Control.OSMGeocoder({
-    collapsed: false,
+    collapsed: true,
     position: 'topright',
     text: 'Location Search'
 });
 map.addControl(osmGeocoder);
 
 // Layers ------------------------------------------------
-var PptElS = L.tileLayer.wms(URL, {
-    format: 'image/png',
-    transparent: true,
-    layers: 'Ppt ElS (mm)',
-    version: '1.3.0',
-    opacity: 0.8
-}).addTo(map);
-
 var PptElW = L.tileLayer.wms(URL, {
     format: 'image/png',
     transparent: true,
     layers: 'Ppt ElW (mm)',
+    version: '1.3.0',
+    opacity: 0.8
+});
+map.addLayer(PptElW);
+
+var PptElS = L.tileLayer.wms(URL, {
+    format: 'image/png',
+    transparent: true,
+    layers: 'Ppt ElS (mm)',
     version: '1.3.0',
     opacity: 0.8
 });
@@ -197,6 +198,7 @@ var PptNeuWarmS = L.tileLayer.wms(URL, {
     version: '1.3.0',
     opacity: 0.8
 });
+
 
 
 var TElS = L.tileLayer.wms(URL, {
@@ -375,58 +377,119 @@ var TNeuWarmS = L.tileLayer.wms(URL, {
     opacity: 0.8
 });
 
+// Initialize variables for dropdown menu
+var vstr = "Ppt";
+var estr = "El";
+var pstr = "";
+var sstr = "W";
+var tstr = vstr+estr+pstr+sstr;
+var shownLayer = window[tstr];  // this turns string into previously defined variable
 
-var baseMaps = {
-    "Precip. El Nino Winter": PptElW,
-    "Precip. El Nino Summer": PptElS,
-    "Precip. La Nina Winter": PptLaW,
-    "Precip. La Nina Summer": PptLaS,
-    "Precip. Neutral Winter": PptNeuW,
-    "Precip. Neutral Summer": PptNeuS,
-    "Precip. PDO Cool Winter": PptCoolW,
-    "Precip. PDO Cool Summer": PptCoolS,
-    "Precip. PDO Warm Winter": PptWarmW,
-    "Precip. PDO Warm Summer": PptWarmS,
-    "Precip. El Nino, PDO Cool Winter": PptElCoolW,
-    "Precip. El Nino, PDO Cool Summer": PptElCoolS,
-    "Precip. El Nino, PDO Warm Winter": PptElWarmW,
-    "Precip. El Nino, PDO Warm Summer": PptElWarmS,
-    "Precip. La Nina, PDO Cool Winter": PptLaCoolW,
-    "Precip. La Nina, PDO Cool Summer": PptLaCoolS,
-    "Precip. La Nina, PDO Warm Winter": PptLaWarmW,
-    "Precip. La Nina, PDO Warm Summer": PptLaWarmS,
-    "Precip. Neutral, PDO Cool Winter": PptNeuCoolW,
-    "Precip. Neutral, PDO Cool Summer": PptNeuCoolS,
-    "Precip. Neutral, PDO Warm Winter": PptNeuWarmW,
-    "Precip. Neutral, PDO Warm Summer": PptNeuWarmS,
-
-    "Temp. El Nino Winter": TElW,
-    "Temp. El Nino Summer": TElS,
-    "Temp. La Nina Winter": TLaW,
-    "Temp. La Nina Summer": TLaS,
-    "Temp. Neutral Winter": TNeuW,
-    "Temp. Neutral Summer": TNeuS,
-    "Temp. PDO Cool Winter": TCoolW,
-    "Temp. PDO Cool Summer": TCoolS,
-    "Temp. PDO Warm Winter": TWarmW,
-    "Temp. PDO Warm Summer": TWarmS,
-    "Temp. El Nino, PDO Cool Winter": TElCoolW,
-    "Temp. El Nino, PDO Cool Summer": TElCoolS,
-    "Temp. El Nino, PDO Warm Winter": TElWarmW,
-    "Temp. El Nino, PDO Warm Summer": TElWarmS,
-    "Temp. La Nina, PDO Cool Winter": TLaCoolW,
-    "Temp. La Nina, PDO Cool Summer": TLaCoolS,
-    "Temp. La Nina, PDO Warm Winter": TLaWarmW,
-    "Temp. La Nina, PDO Warm Summer": TLaWarmS,
-    "Temp. Neutral, PDO Cool Winter": TNeuCoolW,
-    "Temp. Neutral, PDO Cool Summer": TNeuCoolS,
-    "Temp. Neutral, PDO Warm Winter": TNeuWarmW,
-    "Temp. Neutral, PDO Warm Summer": TNeuWarmS
+// Climate variable dropdown menu
+var varMenu = L.control({position: 'topright'});  // initialize dropdown control
+varMenu.onAdd = function (map) {
+    var div = L.DomUtil.create('div', 'menu');  // create div of class 'menu'
+    div.innerHTML = '<select name="vmenu" id="vmenu">' +  // html code for the div
+                        '<option value="Ppt">Precipitation (mm)</option>' +
+                        '<option value="T">Temperature (C)</option>' +
+                    '</select>';
+    div.firstChild.onmousedown = div.firstChild.onclick = L.DomEvent.stopPropagation;  // stops the propagation of mouse events when on dropdown menu
+    return div;
 };
+varMenu.addTo(map);
 
-L.control.layers(baseMaps, null, {
-    collapsed: false
-}).addTo(map);
+$('#vmenu').change(function(e){  // jQuery function to add new layer to map when menu is changed
+    vstr = $("#vmenu option:selected").val();  // get value of the selected variable
+    if(shownLayer !== undefined){
+        map.removeLayer(shownLayer);  // remove previous layer
+    };
+    tstr = vstr+estr+pstr+sstr;  // create new layer string
+    shownLayer = window[tstr];  // convert layer string into predefined variable
+    map.addLayer(shownLayer);  // add new layer to the map
+});
+
+// ENSO dropdown menu
+var ENSOMenu = L.control({position: 'topright'});
+ENSOMenu.onAdd = function (map) {
+    var div = L.DomUtil.create('div', 'menu');
+    div.innerHTML = '<select name="emenu" id="emenu">' +
+                        '<option value="El">El Ni&nacute;o</option>' +
+                        '<option value="La">La Ni&nacute;a</option>' +
+                        '<option value="Neu">Neutral</option>' +
+                        '<option value="">None</option>' +
+                    '</select>';
+    div.firstChild.onmousedown = div.firstChild.onclick = L.DomEvent.stopPropagation;
+    return div;
+};
+ENSOMenu.addTo(map);
+
+$('#emenu').change(function(){
+    estr = $("#emenu option:selected").val();
+    if(shownLayer !== undefined){
+        map.removeLayer(shownLayer);
+    };
+    tstr = vstr+estr+pstr+sstr;
+    shownLayer = window[tstr];
+    if (estr === "" && pstr === ""){
+        alert('Our sincere apologies but an ENSO or PDO phase must be selected in order for anomalies to be calculated.');
+        return;
+    };
+    map.addLayer(shownLayer);
+});
+
+// PDO dropdown menu
+
+var PDOMenu = L.control({position: 'topright'});
+PDOMenu.onAdd = function (map) {
+    var div = L.DomUtil.create('div', 'menu');
+    div.innerHTML = '<select name="pmenu" id="pmenu">' +
+                        '<option value="">None</option>' +
+                        '<option value="Cool">Cool</option>' +
+                        '<option value="Warm">Warm</option>' +
+
+                    '</select>';
+    div.firstChild.onmousedown = div.firstChild.onclick = L.DomEvent.stopPropagation;
+    return div;
+};
+PDOMenu.addTo(map);
+
+$('#pmenu').change(function(){
+    pstr = $("#pmenu option:selected").val();
+    if(shownLayer !== undefined){
+        map.removeLayer(shownLayer);
+    };
+    tstr = vstr+estr+pstr+sstr;
+    if (estr === "" && pstr === ""){
+        alert('Our sincere apologies but an ENSO or PDO phase must be selected in order for anomalies to be calculated.');
+        return;
+    };
+    shownLayer = window[tstr];
+    map.addLayer(shownLayer);
+});
+
+// Season dropdown menu
+var seasonMenu = L.control({position: 'topright'});
+seasonMenu.onAdd = function (map) {
+    var div = L.DomUtil.create('div', 'menu');
+    div.innerHTML = '<select name="smenu" id="smenu">' +
+                        '<option value="W">Winter (DJF)</option>' +
+                        '<option value="S">Summer (JJA)</option>' +
+                    '</select>';
+    div.firstChild.onmousedown = div.firstChild.onclick = L.DomEvent.stopPropagation;
+    return div;
+};
+seasonMenu.addTo(map);
+
+$('#smenu').change(function(){
+    sstr = $("#smenu option:selected").val();
+    if(shownLayer !== undefined){
+        map.removeLayer(shownLayer);
+    };
+    tstr = vstr+estr+pstr+sstr;
+    shownLayer = window[tstr];
+    map.addLayer(shownLayer);
+});
+
 
 // Legend ------------------------------------------
 var PptLegend = L.control({position: 'bottomleft'});
@@ -460,30 +523,39 @@ PptLegend.addTo(map);
 // The below function gives two errors when switching baselayers. This is because it does not cover all conditions.
 // It does, however, function correctly. Maybe see info .hasLayer()
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+map.on('layeradd', function (eventLayer) {
+    //Switch to the Temperature legend...
+    if(typeof(eventLayer.layer.options.version) !== 'undefined'){  // The popup triggers a layeradd which should be avoided when adding legend
+        if (eventLayer.layer.wmsParams.layers.substring(0, 1) === 'T') {
+            if(typeof(TLegend._map) !== "undefined" && TLegend._map !== null){
+                return;
+            } else{
+                this.removeControl(PptLegend);
+                TLegend.addTo(this);
+            };
 
-map.on('baselayerchange', function (eventLayer) {
-    // Switch to the Temperature legend...
-    if (eventLayer.name.substring(0, 1) === 'T') {
-        this.removeControl(PptLegend);
-        TLegend.addTo(this);
-    } else { // Or switch to the Precipitation legend...
-        this.removeControl(TLegend);
-        PptLegend.addTo(this);
-    }
+        } else { // Or switch to the Precipitation legend...
+            if(PptLegend._map !== null){
+                return;
+            } else{
+                this.removeControl(TLegend);
+                PptLegend.addTo(this);
+            };
+        };
+    };
 });
+
 
 // Feature Popup -------------------------------------------
 popup = new L.Popup({maxWidth: 400});
 
 function onMapClick(e){
     var BBOX = map.getBounds().toBBoxString();
-    //var BBOX = "-112.6250,45.9375,-106.5625,47.4375"
     var WIDTH = map.getSize().x;
     var HEIGHT = map.getSize().y;
     var X = map.layerPointToContainerPoint(e.layerPoint).x.toFixed(0);
     var Y = map.layerPointToContainerPoint(e.layerPoint).y.toFixed(0);
 
-// TODO need to add switch for all layers
     if (map.hasLayer(PptElW)){
         var alayer = 'Ppt%20ElW%20(mm)';
     }else if(map.hasLayer(PptElS)){
@@ -589,6 +661,6 @@ function onMapClick(e){
             map.openPopup(popup);
         }
     });
-}
+};
 
 map.on('click', onMapClick);
