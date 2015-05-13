@@ -6,8 +6,8 @@ var map = L.map('map').setView([47,-111], 6);
 var southWest = new L.LatLng(43.9375, -116.6250);
 var northEast = new L.LatLng(49.4375, -103.5625);
 var bounds = new L.LatLngBounds(southWest, northEast);
-var URL = 'http://localhost/cgi-bin/mt_anomalies/qgis_mapserv.fcgi'
-//var URL = 'http://ec2-52-24-169-123.us-west-2.compute.amazonaws.com/cgi-bin/mt_anomalies/qgis_mapserv.fcgi'
+//var URL = 'http://localhost/cgi-bin/mt_anomalies/qgis_mapserv.fcgi'
+var URL = 'http://ec2-52-24-169-123.us-west-2.compute.amazonaws.com/cgi-bin/mt_anomalies/qgis_mapserv.fcgi'
 
 // Background map ----------------------------------------
 L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
