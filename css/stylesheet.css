@@ -17,9 +17,11 @@ h1 {
     margin-left: 20px;
 }
 
-footer {
+#footertext {
+    margin-left: 20px;
+    margin-top: 5px;
     font-family: Courier, cursive;
-}
+} 
 
 #logo {
     text-align: center;
