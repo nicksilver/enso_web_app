@@ -7,7 +7,7 @@ body {
     margin-left: auto;
     margin-right: auto;
     margin-top: 20px;
-    height: 40vw;
+    height: 35vw;
     width: 100%;
     background-color: #ffffff;
 }
@@ -15,6 +15,14 @@ body {
 h1 {
     font-family: Courier, cursive;
     margin-left: 20px;
+}
+
+footer {
+    font-family: Courier, cursive;
+}
+
+#logo {
+    text-align: center;
 }
 
 p {

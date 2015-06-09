@@ -5,8 +5,8 @@
 var map = L.map('map').setView([47,-111], 6);
 var southWest = new L.LatLng(43.9375, -116.6250);
 var northEast = new L.LatLng(49.4375, -103.5625);
-var bounds = new L.LatLngBounds(southWest, northEast);
-//var URL = 'http://localhost/cgi-bin/mt_anomalies/qgis_mapserv.fcgi'
+//var bounds = new L.LatLngBounds(southWest, northEast);
+var URL = 'http://localhost/cgi-bin/mt_anomalies/qgis_mapserv.fcgi'
 var URL = 'http://ec2-52-24-169-123.us-west-2.compute.amazonaws.com/cgi-bin/mt_anomalies/qgis_mapserv.fcgi'
 
 // Background map ----------------------------------------
@@ -519,10 +519,6 @@ TLegend.onAdd = function(map){
 
 PptLegend.addTo(map);
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// The below function gives two errors when switching baselayers. This is because it does not cover all conditions.
-// It does, however, function correctly. Maybe see info .hasLayer()
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 map.on('layeradd', function (eventLayer) {
     //Switch to the Temperature legend...
     if(typeof(eventLayer.layer.options.version) !== 'undefined'){  // The popup triggers a layeradd which should be avoided when adding legend
@@ -647,9 +643,9 @@ function onMapClick(e){
         var alayer = 'T%20NeuWarmS%20(C)'
     };
 
-    var gfURL = URL + '?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&LAYERS=Ppt%20ElS%20(mm)&' +
+    var gfURL = URL + '?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&LAYERS=' + alayer + '&' + //Ppt%20ElS%20(mm)&' +
         'BBOX=' + BBOX + '&HEIGHT=' + HEIGHT + '&WIDTH=' + WIDTH + '&FORMAT=image%2Fpng&' +
-        'INFO_FORMAT=text%2Fhtml&X=' + X + '&Y=' + Y + '&SRS=EPSG:4326&QUERY_LAYERS='+alayer;
+        'INFO_FORMAT=text%2Fhtml&X=' + X + '&Y=' + Y + '&CRS=EPSG:102100&QUERY_LAYERS='+alayer;
 
     $.ajax({
         url: gfURL,
