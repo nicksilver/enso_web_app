@@ -2,12 +2,12 @@
  * Created by nick on 3/26/15.
  */
 
-var map = L.map('map').setView([47,-111], 6);
+var map = L.map('map').setView([47, -111], 6);
 var southWest = new L.LatLng(43.9375, -116.6250);
 var northEast = new L.LatLng(49.4375, -103.5625);
 // var bounds = new L.LatLngBounds(southWest, northEast);
 // var URL = 'http://localhost/cgi-bin/mt_anomalies/qgis_mapserv.fcgi'
-var URL = 'http://ec2-54-69-91-170.us-west-2.compute.amazonaws.com/cgi-bin/mt_anomalies/qgis_mapserv.fcgi'
+var URL = 'http://ec2-54-69-91-170.us-west-2.compute.amazonaws.com/cgi-bin/mt_anomalies/qgis_mapserv.fcgi';
 
 // Background map ----------------------------------------
 L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
@@ -29,7 +29,6 @@ var PptElW = L.tileLayer.wms(URL, {
     version: '1.3.0',
     opacity: 0.8
 });
-map.addLayer(PptElW);
 
 var PptElS = L.tileLayer.wms(URL, {
     format: 'image/png',
@@ -126,6 +125,7 @@ var PptElWarmW = L.tileLayer.wms(URL, {
     version: '1.3.0',
     opacity: 0.8
 });
+map.addLayer(PptElWarmW);
 
 var PptElWarmS = L.tileLayer.wms(URL, {
     format: 'image/png',
@@ -380,9 +380,9 @@ var TNeuWarmS = L.tileLayer.wms(URL, {
 // Initialize variables for dropdown menu
 var vstr = "Ppt";
 var estr = "El";
-var pstr = "";
+var pstr = "Warm";
 var sstr = "W";
-var tstr = vstr+estr+pstr+sstr;
+var tstr = vstr + estr + pstr + sstr;
 var shownLayer = window[tstr];  // this turns string into previously defined variable
 
 // Climate variable dropdown menu
@@ -403,7 +403,7 @@ $('#vmenu').change(function(e){  // jQuery function to add new layer to map when
     if(shownLayer !== undefined){
         map.removeLayer(shownLayer);  // remove previous layer
     };
-    tstr = vstr+estr+pstr+sstr;  // create new layer string
+    tstr = vstr + estr + pstr + sstr;  // create new layer string
     shownLayer = window[tstr];  // convert layer string into predefined variable
     map.addLayer(shownLayer);  // add new layer to the map
 });
@@ -413,8 +413,8 @@ var ENSOMenu = L.control({position: 'topright'});
 ENSOMenu.onAdd = function (map) {
     var div = L.DomUtil.create('div', 'menu');
     div.innerHTML = '<select name="emenu" id="emenu">' +
-                        '<option value="El">El Ni&nacute;o</option>' +
-                        '<option value="La">La Ni&nacute;a</option>' +
+                        '<option value="El">El Ni&ntilde;o</option>' +
+                        '<option value="La">La Ni&ntilde;a</option>' +
                         '<option value="Neu">Neutral</option>' +
                         '<option value="">None</option>' +
                     '</select>';
@@ -443,10 +443,9 @@ var PDOMenu = L.control({position: 'topright'});
 PDOMenu.onAdd = function (map) {
     var div = L.DomUtil.create('div', 'menu');
     div.innerHTML = '<select name="pmenu" id="pmenu">' +
-                        '<option value="">None</option>' +
-                        '<option value="Cool">PDO Cool</option>' +
                         '<option value="Warm">PDO Warm</option>' +
-
+                        '<option value="Cool">PDO Cool</option>' +
+                        '<option value="">None</option>' +
                     '</select>';
     div.firstChild.onmousedown = div.firstChild.onclick = L.DomEvent.stopPropagation;
     return div;

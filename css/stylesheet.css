@@ -2,6 +2,16 @@ body {
     margin: 0px;
 }
 
+li {
+    margin: 15px;
+}
+
+a:link, a:visited {
+    color: black;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
 #map {
     display: block;
     margin-left: auto;
@@ -15,6 +25,12 @@ body {
 h1 {
     font-family: Courier, cursive;
     margin-left: 20px;
+}
+
+h3 {
+    font-family: Courier, cursive;
+    font-weight: bold;
+
 }
 
 #footertext {
@@ -35,7 +51,7 @@ p {
 .legend {
     width: 150px;
     height: 175px;
-    background-color: #ffffff;
+    background-color: #ffffff;    margin-left: 20px;
     /*position: absolute;*/
     /*top: 155px;*/
     /*right: 30px;*/
@@ -44,6 +60,7 @@ p {
     display: block;
 }
 
+/* Location control */
 select {
     padding:3px;
     margin: 0;
@@ -93,3 +110,115 @@ label:before {
     pointer-events:none;
     display:block;
 }
+
+/* Header menus */
+.header-cont{
+    font-family: Courier, cursive;
+    font-weight: bold;
+}
+
+.header-pop{
+    font-family: Courier, cursive;
+}
+
+#intro-cont {
+    margin-left: 50px;
+    float: left;
+    margin-bottom: 10px;
+}
+
+#intro-pop {
+    position: absolute;
+    top: 120px;
+    z-index: 9998;
+    font-weight: normal;
+    font-family: Courier, cursive;
+    width: 600px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+#howto-cont{
+    position: relative;
+    float: left;
+    margin-left: 40px;
+}
+
+#howto-pop{
+    position: absolute;
+    top: 40px;
+    z-index: 9999;
+    font-weight: normal;
+    font-family: Courier, cursive;
+    width: 400px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+#cond-cont{
+    position: relative;
+    float: left;
+    margin-left: 40px;
+}
+
+#cond-pop{
+    position: absolute;
+    top: 40px;
+    z-index: 9999;
+    font-weight: normal;
+    font-family: Courier, cursive;
+    width: 95px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+#ack-cont{
+    position: relative;
+    float: left;
+    margin-left: 40px;
+}
+
+#ack-pop{
+    position: absolute;
+    top: 40px;
+    z-index: 9999;
+    font-weight: normal;
+    font-family: Courier, cursive;
+    width: 400px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+#bugs-cont{
+    position: relative;
+    float: left;
+    margin-left: 40px;
+    color: red;
+}
+
+#bugs-pop{
+    position: absolute;
+    top: 40px;
+    z-index: 9999;
+    font-weight: normal;
+    font-family: Courier, cursive;
+    color: red;
+    width: 820px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 10px;
+    left: -730px;
+}
+
+#blank-cont{
+    position: relative;
+    float: left;
+    margin-left: 20px;
+    width: 300px;
+    height: 20px;
+}
+

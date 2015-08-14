@@ -10,13 +10,89 @@
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
     <link rel="stylesheet" type="text/css" href="plugins/leaflet-control-osm-geocoder-master/Control.OSMGeocoder.css" />
 </head>
+
 <body>
     <h1><strong>Montana Climate Variability Map</strong></h1>
-    <p>Click on the map to get the anomaly value for the specified location.</p>
+    <div class="header-cont" id="intro-cont">Introduction
+        <script src="js/header_menus.js"></script>
+        <div id="intro-pop" style="display: none">
+            <p>The current phase of the El Ni&ntilde;o Southern Oscillation (<a href="http://www.esrl.noaa.gov/psd/enso/">ENSO</a>)
+                and the Pacific Decadal Oscillation (<a href="https://www.ncdc.noaa.gov/teleconnections/pdo/">PDO</a>) serve as some of the best predictors of
+                mid-range climate conditions. This web application provides a
+            tool to explore the interactions of the two oscillations and how they impact Montana climate across the
+            state.</p>
+
+            <p>The dataset includes years from 1915-2011. Results are reported as anomalies, or departures from the average
+                values of the entire length of record. The anomalies are calculated as the average of the years between
+                1915 and 2011 that meet the conditions specified in the drop down menus minus the average of the full
+                historical record. Results are given in millimeters and &deg;C for precipitation and temperature, respectively.</p>
+
+            <p>The overall methodology is based on the University of Washington Climate Impact Group's (UW-CIG)
+                <a href="http://cses.washington.edu/cig/maps/" target="_blank">Pacific Northwest Climate Maps</a>. If
+                you are interested in more details please visit the UW-CIG
+                <a href="http://cses.washington.edu/cig/maps/about.shtml" target="_blank">About these Maps</a> webpage.</p>
+
+
+        </div>
+    </div>
+    <div class="header-cont" id="howto-cont">How to use?
+        <script src="js/header_menus.js"></script>
+        <div id="howto-pop" style="display: none">
+            <ol>
+                <li>Select climate variable, ENSO phase, PDO phase, and season from the drop down menus in the upper
+                right corner of the map.</li>
+                <li>Use the legend in the lower left corner of the map to quantify anomalies across the state.</li>
+                <li>Zoom in on a specific location using the zoom toolbar in the upper left corner of the map or the
+                search toolbar in the upper right corner.</li>
+                <li>Click in the center of a grid- cell to retrieve the specified anomaly. See bug report for current
+                issues with this feature.</li>
+            </ol>
+        </div>
+    </div>
+    <div class="header-cont" id="cond-cont">Current conditions
+        <script src="js/header_menus.js"></script>
+        <div id="cond-pop" style="display: none">
+            <p>Coming soon!</p>
+        </div>
+    </div>
+    <div class="header-cont" id="ack-cont">Acknowledgements
+        <script src="js/header_menus.js"></script>
+        <div id="ack-pop" style="display: none">
+            <p>This web application was funded by the <a href="http://leg.mt.gov/bills/2013/mca/2/15/2-15-1516.htm"
+                                                         target="_blank">Montana Fertilizer Advisory Committee</a>
+                through the MT Fertilizer Tax Research Fund awarded to
+                <a href="http://landresources.montana.edu/dept/faculty/maxwell-b.html" target="_blank">Dr. Bruce Maxwell</a>,
+                Dr. Judit Barroso, and Dr. Clain Jones,
+                Montana State University, Land Resources and Environmental Sciences. Additional support
+            from the <a href="http://www.climate.umt.edu/" target="_blank">Montana Climate Office</a>.</p>
+
+
+            <p>The web application was inspired by the University of Washington Climate Impact Group's
+                <a href="http://cses.washington.edu/cig/maps/" target="_blank">Pacific
+            Northwest Climate Maps</a>.</p>
+
+            <p>The interpolated climate data used to calculate the anomalies was provided by: Livneh, B., E. A.
+                Rosenberg, C. Lin, B. Nijssen, V. Mishra, K. M. Andreadis, E. P. Maurer, and D. P. Lettenmaier, 2013:
+                <a href="http://journals.ametsoc.org/doi/abs/10.1175/1520-0442%282002%29015%3C3237%3AALTHBD%3E2.0.CO%3B2"
+                   target="_blank"> A Long-Term Hydrologically Based Dataset of Land Surface Fluxes and States for the
+                   Conterminous United States</a>: Update and Extensions. J. Climate, 26, 9384~9392.</p>
+        </div>
+    </div>
+    <div class="header-cont" id="bugs-cont">Bug reports!
+        <script src="js/header_menus.js"></script>
+        <div id="bugs-pop" style="display: none">
+            <p>Currently, it is necessary to zoom in and click on the center of a grid-cell to get an accurate anomaly
+                value. Clicking while zoomed out at the state-scale or near the boundaries of a grid-cell will give
+                erroneous values. I am working hard to figure out why this is and will remove this "Bug report" once it is
+                fixed. Thanks for your patience.</p>
+        </div>
+    </div>
+    <div id="blank-cont"></div>
     <div id="map">
         <script src="js/main.js"></script>
     </div>
 </body>
+
 <footer>
   <div id="footertext">
     For questions or comments, please contact <a href="mailto:nick@adaptivehydro.com">nick@adaptivehydro.com</a>
@@ -25,6 +101,9 @@
     <a href="http://www.adaptivehydro.com">
     <img src="http://www.adaptivehydro.com/uploads/2/2/3/0/22304922/1413840929.png" width="270" height="72">
     </a>
+    <!--<a href="http://www.climate.umt.edu/">-->
+      <!--<img src="http://www.climate.umt.edu/imx/mcologo-small.png">-->
+    <!--</a>-->
     </div>
 </footer>
 </html>
