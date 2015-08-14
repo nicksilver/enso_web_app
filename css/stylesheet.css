@@ -37,11 +37,31 @@ h3 {
     margin-left: 20px;
     margin-top: 5px;
     font-family: Courier, cursive;
-} 
-
-#logo {
-    text-align: center;
+    width: 1000px;
 }
+
+#logos {
+    text-align: center;
+    margin-top: 20px;
+    min-width: 700px;
+}
+
+#maes-logo {
+    display: inline-block;
+    padding-right: 60px;
+}
+
+#ah-logo {
+    display: inline-block;
+    padding-right: 60px;
+}
+
+#mco-logo {
+    display: inline-block;
+}
+
+
+
 
 p {
     font-family: Courier;
@@ -112,6 +132,10 @@ label:before {
 }
 
 /* Header menus */
+#container {
+    width:1000px;
+}
+
 .header-cont{
     font-family: Courier, cursive;
     font-weight: bold;
@@ -207,18 +231,11 @@ label:before {
     font-weight: normal;
     font-family: Courier, cursive;
     color: red;
-    width: 820px;
+    width: 800px;
     background-color: #ffffff;
     border-radius: 10px;
     padding: 10px;
-    left: -730px;
+    left: -700px;
 }
 
-#blank-cont{
-    position: relative;
-    float: left;
-    margin-left: 20px;
-    width: 300px;
-    height: 20px;
-}
 
