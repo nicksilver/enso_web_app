@@ -75,6 +75,8 @@ p {
     border-radius: 10px;
     text-align: center;
     display: block;
+    border-style: solid;
+    border-color: gray;
 }
 
 /* Location control */
@@ -158,6 +160,8 @@ label:before {
     background-color: #ffffff;
     border-radius: 10px;
     padding: 10px;
+    border-style: solid;
+    border-color: gray;
 }
 
 #howto-cont{
@@ -176,6 +180,8 @@ label:before {
     background-color: #ffffff;
     border-radius: 10px;
     padding: 10px;
+    border-style: solid;
+    border-color: gray;
 }
 
 #cond-cont{
@@ -194,6 +200,8 @@ label:before {
     background-color: #ffffff;
     border-radius: 10px;
     padding: 10px;
+    border-style: solid;
+    border-color: gray;
 }
 
 #ack-cont{
@@ -212,6 +220,8 @@ label:before {
     background-color: #ffffff;
     border-radius: 10px;
     padding: 10px;
+    border-style: solid;
+    border-color: gray;
 }
 
 #bugs-cont{
@@ -233,6 +243,8 @@ label:before {
     border-radius: 10px;
     padding: 10px;
     left: -700px;
+    border-style: solid;
+    border-color: indianred;
 }
 
 
