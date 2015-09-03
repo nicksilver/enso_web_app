@@ -438,7 +438,6 @@ $('#emenu').change(function(){
 });
 
 // PDO dropdown menu
-
 var PDOMenu = L.control({position: 'topright'});
 PDOMenu.onAdd = function (map) {
     var div = L.DomUtil.create('div', 'menu');
@@ -551,6 +550,17 @@ function onMapClick(e){
     var X = map.layerPointToContainerPoint(e.layerPoint).x.toFixed(0);
     var Y = map.layerPointToContainerPoint(e.layerPoint).y.toFixed(0);
 
+    var bds = map.getBounds();
+    var sz = map.getSize();
+    var w = bds.getNorthEast().lng - bds.getSouthWest().lng;
+    var h = bds.getNorthEast().lat - bds.getSouthWest().lat;
+    var X2= (((e.latlng.lng - bds.getSouthWest().lng) / w) * sz.x).toFixed(0);
+    var Y2 = (((bds.getNorthEast().lat - e.latlng.lat) / h) * sz.y).toFixed(0);
+    console.log(X);
+    console.log(Y);
+    console.log(X2);
+    console.log(Y2);
+
     if (map.hasLayer(PptElW)){
         var alayer = 'Ppt%20ElW%20(mm)';
     }else if(map.hasLayer(PptElS)){
@@ -644,7 +654,7 @@ function onMapClick(e){
 
     var gfURL = URL + '?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&LAYERS=' + alayer + '&' + //Ppt%20ElS%20(mm)&' +
         'BBOX=' + BBOX + '&HEIGHT=' + HEIGHT + '&WIDTH=' + WIDTH + '&FORMAT=image%2Fpng&' +
-        'INFO_FORMAT=text%2Fhtml&X=' + X + '&Y=' + Y + '&CRS=EPSG:4326&QUERY_LAYERS='+alayer;
+        'INFO_FORMAT=text%2Fhtml&X=' + X2 + '&Y=' + Y2 + '&CRS=EPSG:4326&QUERY_LAYERS='+alayer;
 
     $.ajax({
         url: gfURL,
