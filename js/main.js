@@ -554,8 +554,8 @@ function onMapClick(e){
     var sz = map.getSize();
     var w = bds.getNorthEast().lng - bds.getSouthWest().lng;
     var h = bds.getNorthEast().lat - bds.getSouthWest().lat;
-    var X2= (((e.latlng.lng - bds.getSouthWest().lng) / w) * sz.x).toFixed(0);
-    var Y2 = (((bds.getNorthEast().lat - e.latlng.lat) / h) * sz.y).toFixed(0);
+    var X2= (((e.latlng.lng - bds.getSouthWest().lng) / w) * sz.x).toFixed(8);
+    var Y2 = (((bds.getNorthEast().lat - e.latlng.lat) / h) * sz.y).toFixed(8);
     console.log(X);
     console.log(Y);
     console.log(X2);
